@@ -2,6 +2,8 @@
 import os
 import sqlite3
 from flask import Flask, request, jsonify
+import subprocess
+import shlex
 
 app = Flask(__name__)
 
@@ -15,8 +17,8 @@ def get_user():
     email = request.args.get("email")
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    query = f"SELECT * FROM users WHERE email = '{email}'"
-    cursor.execute(query)
+    query = "SELECT * FROM users WHERE email = %s"
+    cursor.execute(query, (email,))
     results = cursor.fetchall()
     conn.close()
     return jsonify({"users": results})
@@ -28,8 +30,8 @@ def search_users():
     name = request.args.get("name", "")
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    query = "SELECT * FROM users WHERE name LIKE '%{}%'".format(name)
-    cursor.execute(query)
+    query = "SELECT * FROM users WHERE name LIKE '%%s%'"
+    cursor.execute(query, (name,))
     results = cursor.fetchall()
     conn.close()
     return jsonify({"results": results})
@@ -40,7 +42,7 @@ def deploy():
     """Trigger deployment to a target server."""
     server = request.json.get("server")
     branch = request.json.get("branch", "main")
-    os.system(f"ssh {server} 'cd /app && git pull origin {branch}'")
+    subprocess.run(shlex.split(f"ssh {server} 'cd /app && git pull origin {branch}'"), shell=False)
     return jsonify({"status": "deployed"})
 
 

@@ -5,14 +5,14 @@
 {% block content %}
 <div class="profile-card">
     <h2>{{ user.name }}</h2>
-    <p class="bio">{{ user.bio|safe }}</p>
-    <div class="about">{{ user.about_html|safe }}</div>
+    <p class="bio">{{ user.bio }}</p>
+    <div class="about">{{ user.about_html }}</div>
 
-    {% autoescape off %}
+    
     <div class="user-content">
         {{ user.custom_html }}
     </div>
-    {% endautoescape %}
+    
 
     <p class="email">Contact: {{ user.email }}</p>
 </div>
