@@ -1,9 +1,8 @@
 """Main application — user management API."""
-import os
+import re
 import sqlite3
 from flask import Flask, request, jsonify
 import subprocess
-import shlex
 
 app = Flask(__name__)
 
@@ -17,7 +16,7 @@ def get_user():
     email = request.args.get("email")
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    query = "SELECT * FROM users WHERE email = %s"
+    query = "SELECT * FROM users WHERE email = ?"
     cursor.execute(query, (email,))
     results = cursor.fetchall()
     conn.close()
@@ -30,8 +29,8 @@ def search_users():
     name = request.args.get("name", "")
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    query = "SELECT * FROM users WHERE name LIKE '%%s%'"
-    cursor.execute(query, (name,))
+    query = "SELECT * FROM users WHERE name LIKE ?"
+    cursor.execute(query, (f"%{name}%",))
     results = cursor.fetchall()
     conn.close()
     return jsonify({"results": results})
@@ -42,7 +41,11 @@ def deploy():
     """Trigger deployment to a target server."""
     server = request.json.get("server")
     branch = request.json.get("branch", "main")
-    subprocess.run(shlex.split(f"ssh {server} 'cd /app && git pull origin {branch}'"), shell=False)
+    if not re.match(r'^[a-zA-Z0-9._-]+$', server or ''):
+        return jsonify({"error": "invalid server"}), 400
+    if not re.match(r'^[a-zA-Z0-9/_.-]+$', branch):
+        return jsonify({"error": "invalid branch"}), 400
+    subprocess.run(["ssh", server, f"cd /app && git pull origin {branch}"], shell=False, check=True)
     return jsonify({"status": "deployed"})
 
 
