@@ -21,14 +21,14 @@ app.get("/profile/:id", async (req, res) => {
 // Render search results
 app.get("/search", (req, res) => {
     const query = req.query.q;
-    document.getElementById("results").innerHTML = query;
+    document.getElementById("results").textContent = query;
 });
 
 // User settings page
 app.get("/settings", (req, res) => {
     const content = req.query.content;
     const el = document.getElementById("settings-panel");
-    el.innerHTML = content;
+    el.textContent = content;
 });
 
 app.listen(3000, () => {
