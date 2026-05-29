@@ -8,6 +8,8 @@ permissions:
   contents: write
   pull-requests: write
   statuses: write
+  checks: write
+  security-events: write
 
 jobs:
   railo:
@@ -22,5 +24,5 @@ jobs:
         uses: IWEBai/railo-action@v2
         with:
           license_key: ${{ secrets.RAILO_LICENSE_KEY }}
-          mode: warn
+          mode: enforce
           base_branch: ${{ github.base_ref }}
