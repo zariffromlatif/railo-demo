@@ -19,9 +19,8 @@ jobs:
           fetch-depth: 0
 
       - name: Railo
-        uses: IWEBai/railo@v2
+        uses: IWEBai/railo-action@v2
         with:
+          license_key: ${{ secrets.RAILO_LICENSE_KEY }}
           mode: warn
           base_branch: ${{ github.base_ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
