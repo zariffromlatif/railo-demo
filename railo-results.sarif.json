@@ -1,0 +1,261 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Fixpoint",
+          "rules": [
+            {
+              "id": "app.rules.gha-unpinned-action",
+              "name": "app.rules.gha-unpinned-action",
+              "shortDescription": {
+                "text": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n"
+              },
+              "fullDescription": {
+                "text": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n"
+              },
+              "help": {
+                "text": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n"
+              },
+              "properties": {
+                "cwe": "CWE-1395",
+                "security-severity": "6.0",
+                "confidence": "high"
+              },
+              "helpUri": "https://github.com/IWEBai/fixpoint/docs/rules/app.rules.gha-unpinned-action"
+            },
+            {
+              "id": "app.rules.python-sql-injection-concat",
+              "name": "app.rules.python-sql-injection-concat",
+              "shortDescription": {
+                "text": "SQL injection via string concatenation"
+              },
+              "fullDescription": {
+                "text": "SQL injection via string concatenation"
+              },
+              "help": {
+                "text": "SQL injection via string concatenation"
+              },
+              "properties": {
+                "cwe": "CWE-89",
+                "owasp": "A03:2021",
+                "security-severity": "8.9",
+                "confidence": "high"
+              },
+              "helpUri": "https://github.com/IWEBai/fixpoint/docs/rules/app.rules.python-sql-injection-concat"
+            },
+            {
+              "id": "app.rules.python-command-injection-os-popen",
+              "name": "app.rules.python-command-injection-os-popen",
+              "shortDescription": {
+                "text": "Command injection via os.popen \u2014 use subprocess.run with shell=False instead"
+              },
+              "fullDescription": {
+                "text": "Command injection via os.popen \u2014 use subprocess.run with shell=False instead"
+              },
+              "help": {
+                "text": "Command injection via os.popen \u2014 use subprocess.run with shell=False instead"
+              },
+              "properties": {
+                "cwe": "CWE-78",
+                "owasp": "A03:2021",
+                "security-severity": "8.9",
+                "confidence": "high"
+              },
+              "helpUri": "https://github.com/IWEBai/fixpoint/docs/rules/app.rules.python-command-injection-os-popen"
+            },
+            {
+              "id": "app.rules.flask-debug-enabled",
+              "name": "app.rules.flask-debug-enabled",
+              "shortDescription": {
+                "text": "Flask debug mode is enabled. This exposes the interactive debugger and allows arbitrary code execution. Disable debug mode in production.\n"
+              },
+              "fullDescription": {
+                "text": "Flask debug mode is enabled. This exposes the interactive debugger and allows arbitrary code execution. Disable debug mode in production.\n"
+              },
+              "help": {
+                "text": "Flask debug mode is enabled. This exposes the interactive debugger and allows arbitrary code execution. Disable debug mode in production.\n"
+              },
+              "properties": {
+                "cwe": "CWE-16",
+                "owasp": "A05:2021",
+                "security-severity": "8.9",
+                "confidence": "high"
+              },
+              "helpUri": "https://github.com/IWEBai/fixpoint/docs/rules/app.rules.flask-debug-enabled"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "app.rules.gha-unpinned-action",
+          "ruleIndex": 0,
+          "message": {
+            "text": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/railo.yml"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 9,
+                  "endLine": 18,
+                  "endColumn": 34,
+                  "snippet": {
+                    "text": "      - uses: actions/checkout@v4"
+                  },
+                  "contextRegion": {
+                    "startLine": 16,
+                    "endLine": 20
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "WARNING",
+            "confidence": "high"
+          }
+        },
+        {
+          "ruleId": "app.rules.gha-unpinned-action",
+          "ruleIndex": 0,
+          "message": {
+            "text": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".github/workflows/railo.yml"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 9,
+                  "endLine": 24,
+                  "endColumn": 37,
+                  "snippet": {
+                    "text": "        uses: IWEBai/railo-action@v2"
+                  },
+                  "contextRegion": {
+                    "startLine": 22,
+                    "endLine": 26
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "WARNING",
+            "confidence": "high"
+          }
+        },
+        {
+          "ruleId": "app.rules.python-sql-injection-concat",
+          "ruleIndex": 1,
+          "message": {
+            "text": "SQL injection via string concatenation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "server.py"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 5,
+                  "endLine": 17,
+                  "endColumn": 76,
+                  "snippet": {
+                    "text": "    cursor.execute(\"SELECT * FROM users WHERE name LIKE '%\" + query + \"%'\")"
+                  },
+                  "contextRegion": {
+                    "startLine": 15,
+                    "endLine": 19
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "ERROR",
+            "confidence": "high"
+          }
+        },
+        {
+          "ruleId": "app.rules.python-command-injection-os-popen",
+          "ruleIndex": 2,
+          "message": {
+            "text": "Command injection via os.popen \u2014 use subprocess.run with shell=False instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "server.py"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 14,
+                  "endLine": 24,
+                  "endColumn": 27,
+                  "snippet": {
+                    "text": "    result = os.popen(cmd).read()"
+                  },
+                  "contextRegion": {
+                    "startLine": 22,
+                    "endLine": 26
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "ERROR",
+            "confidence": "high"
+          }
+        },
+        {
+          "ruleId": "app.rules.flask-debug-enabled",
+          "ruleIndex": 3,
+          "message": {
+            "text": "Flask debug mode is enabled. This exposes the interactive debugger and allows arbitrary code execution. Disable debug mode in production.\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "server.py"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 5,
+                  "endLine": 28,
+                  "endColumn": 24,
+                  "snippet": {
+                    "text": "    app.run(debug=True)"
+                  },
+                  "contextRegion": {
+                    "startLine": 26,
+                    "endLine": 28
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "ERROR",
+            "confidence": "high"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 from flask import Flask, request
 import sqlite3
 import os
+import subprocess
+import shlex
 
 app = Flask(__name__)
 
@@ -21,8 +23,13 @@ def get_users():
 def run_cmd():
     cmd = request.args.get("cmd", "ls")
     # Command Injection
-    result = os.popen(cmd).read()
+    result = subprocess.run(shlex.split(cmd), shell=False, capture_output=True).read()
     return {"output": result}
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
+
+# SECURITY: Hardened session cookie settings added by Railo.
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
