@@ -1,0 +1,156 @@
+[
+  {
+    "check_id": "app.rules.gha-unpinned-action",
+    "path": "/github/workspace/.github/workflows/railo.yml",
+    "start": {
+      "line": 18,
+      "col": 9,
+      "offset": 252
+    },
+    "end": {
+      "line": 18,
+      "col": 34,
+      "offset": 277
+    },
+    "extra": {
+      "message": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n",
+      "metadata": {
+        "category": "security",
+        "confidence": "high",
+        "cwe": "CWE-1395",
+        "fix_available": true,
+        "references": [
+          "https://cwe.mitre.org/data/definitions/1395.html",
+          "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions"
+        ]
+      },
+      "severity": "WARNING",
+      "fingerprint": "requires login",
+      "lines": "requires login",
+      "validation_state": "NO_VALIDATOR",
+      "engine_kind": "OSS"
+    }
+  },
+  {
+    "check_id": "app.rules.gha-unpinned-action",
+    "path": "/github/workspace/.github/workflows/railo.yml",
+    "start": {
+      "line": 24,
+      "col": 9,
+      "offset": 384
+    },
+    "end": {
+      "line": 24,
+      "col": 37,
+      "offset": 412
+    },
+    "extra": {
+      "message": "GitHub Action is pinned to a mutable tag instead of a commit SHA. Pin to a full commit SHA for supply chain safety.\n",
+      "metadata": {
+        "category": "security",
+        "confidence": "high",
+        "cwe": "CWE-1395",
+        "fix_available": true,
+        "references": [
+          "https://cwe.mitre.org/data/definitions/1395.html",
+          "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions"
+        ]
+      },
+      "severity": "WARNING",
+      "fingerprint": "requires login",
+      "lines": "requires login",
+      "validation_state": "NO_VALIDATOR",
+      "engine_kind": "OSS"
+    }
+  },
+  {
+    "check_id": "app.rules.python-sql-injection-concat",
+    "path": "/github/workspace/server.py",
+    "start": {
+      "line": 17,
+      "col": 5,
+      "offset": 349
+    },
+    "end": {
+      "line": 17,
+      "col": 76,
+      "offset": 420
+    },
+    "extra": {
+      "message": "SQL injection via string concatenation",
+      "metadata": {
+        "category": "security",
+        "confidence": "high",
+        "cwe": "CWE-89",
+        "owasp": "A03:2021"
+      },
+      "severity": "ERROR",
+      "fingerprint": "requires login",
+      "lines": "requires login",
+      "validation_state": "NO_VALIDATOR",
+      "engine_kind": "OSS"
+    }
+  },
+  {
+    "check_id": "app.rules.python-command-injection-os-popen",
+    "path": "/github/workspace/server.py",
+    "start": {
+      "line": 24,
+      "col": 14,
+      "offset": 577
+    },
+    "end": {
+      "line": 24,
+      "col": 27,
+      "offset": 590
+    },
+    "extra": {
+      "message": "Command injection via os.popen \u2014 use subprocess.run with shell=False instead",
+      "metadata": {
+        "category": "security",
+        "confidence": "high",
+        "cwe": "CWE-78",
+        "owasp": "A03:2021",
+        "fix_available": true
+      },
+      "severity": "ERROR",
+      "fingerprint": "requires login",
+      "lines": "requires login",
+      "validation_state": "NO_VALIDATOR",
+      "engine_kind": "OSS"
+    }
+  },
+  {
+    "check_id": "app.rules.flask-debug-enabled",
+    "path": "/github/workspace/server.py",
+    "start": {
+      "line": 28,
+      "col": 5,
+      "offset": 660
+    },
+    "end": {
+      "line": 28,
+      "col": 24,
+      "offset": 679
+    },
+    "extra": {
+      "message": "Flask debug mode is enabled. This exposes the interactive debugger and allows arbitrary code execution. Disable debug mode in production.\n",
+      "metadata": {
+        "category": "security",
+        "confidence": "high",
+        "cwe": "CWE-16",
+        "owasp": "A05:2021",
+        "fix_available": true,
+        "references": [
+          "https://flask.palletsprojects.com/en/2.3.x/config/#DEBUG",
+          "https://cwe.mitre.org/data/definitions/16.html"
+        ]
+      },
+      "severity": "ERROR",
+      "fingerprint": "requires login",
+      "lines": "requires login",
+      "validation_state": "NO_VALIDATOR",
+      "engine_kind": "OSS"
+    }
+  }
+]
